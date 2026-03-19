@@ -3,7 +3,7 @@ sys: buildroot
 sys_ver: v1.1.4
 sys_var: v1
 
-status: basic
+status: peripheral
 last_update: 2025-03-19
 ---
 
@@ -34,7 +34,7 @@ last_update: 2025-03-19
 将 microSD 卡插入 Milk-V Duo S，重启。
 
 开发板串口通过杜邦线与调试模块连接；黑色箭头指的为GND，白色箭头指的为TX，绿色箭头指的为RX。（连接方式为：开发板GND->调试器GND，开发板TX->调试器RX，开发板RX->调试器TX
-![uart](./images/uart.png)
+
 
 ##### 打开终端，使用 minicom 或 tio 连接串口
 
