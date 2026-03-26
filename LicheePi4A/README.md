@@ -4,6 +4,7 @@ cpu: TH1520
 cpu_core: XuanTie C910 + XuanTie C906 + XuanTie E902
 ram: 8G/16G
 vendor: Sipeed
+soc_vendor: XuanTie
 ---
 
 # Lichee Pi 4A
