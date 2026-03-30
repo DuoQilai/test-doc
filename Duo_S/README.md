@@ -1,10 +1,10 @@
 ---
 product: Milk-V Duo S
-silicon_vendor: Sophgo
-soc: SG2000
+soc_vendor: Sophgo
+cpu: SG2000
 cpu_core: XuanTie C906 + ARM Cortex-A53
 ram: 512MB
-board_vendor: Milk-V
+vendor: Milk-V
 ---
 
 # Milk-V Duo S
