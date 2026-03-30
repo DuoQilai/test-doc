@@ -1,4 +1,13 @@
-# RuyiSDK 示例 02：Coremark
+---
+sys: buildroot
+sys_ver: v1.1.4
+sys_var: v1
+
+status: basics
+last_update: 2025-03-19
+---
+
+#  RuyiSDK 基础示例
 
 ## Coremark (GCC版) 
 

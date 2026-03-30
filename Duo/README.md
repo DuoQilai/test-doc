@@ -1,10 +1,10 @@
 ---
 product: Milk-V Duo (64M)
 cpu: CV1800B
-soc_vendor: Sophgo
 cpu_core: XuanTie C906
 ram: 64MB
 vendor: Milk-V
+soc_vendor: Sophgo
 
 ---
 
