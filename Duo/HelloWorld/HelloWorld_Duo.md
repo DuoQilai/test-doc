@@ -70,7 +70,14 @@ ssh root@192.168.42.1
 
 ./hello-gcc
 ```
-![gnu-hello](./images/gnu-hello.png)
+
+正常情况下，终端会看到如下输出：
+
+```
+[root@milkv-duo]~# ./hello-gcc
+Hello, World!
+[root@milkv-duo]~#
+```
 
 ## Hello World (LLVM版) 
 创建并激活ruyi虚拟环境（LLVM）
@@ -115,4 +122,12 @@ ssh root@192.168.42.1
 
 ./hello-llvm
 ```
-![llvm-hello](./images/llvm-hello.png)
+
+
+正常情况下，终端会看到如下输出：
+
+```
+[root@milkv-duo]~# ./hello-llvm
+Hello, World!
+[root@milkv-duo]~#
+```
