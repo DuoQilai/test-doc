@@ -7,7 +7,7 @@ status: others
 last_update: 2025-10-29
 ---
 
-# 在 LicheePi 4A 上运行 Dhrystone 基准测试
+# RuyiSDK 性能评测示例
 
 ## 环境说明
 
