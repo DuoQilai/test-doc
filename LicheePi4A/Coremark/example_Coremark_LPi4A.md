@@ -7,7 +7,7 @@ status: basics
 last_update: 2025-10-29
 ---
 
-# RuyiSDK 示例 02：Coremark
+# RuyiSDK 基础示例
 
 ## Coremark (GCC版)
 
@@ -34,7 +34,34 @@ cd coremark
 make CC=riscv64-plct-linux-gnu-gcc XCFLAGS="-mcpu=xt-c910" compile
 ./coremark.exe
 ```
-<img width="1377" height="980" alt="image" src="https://github.com/user-attachments/assets/0cbce389-9f15-4f9d-998d-a2e4a35682f8" />
+
+正常情况下，终端会看到类似如下输出：
+
+```
+$ make CC=riscv64-linux-gnu-gcc XCFLAGS="-mcpu=xt-c910" compile
+riscv64-linux-gnu-gcc -O2 -Ilinux -Iposix -I. -DFLAGS=\"-O2 -mcpu=xt-c910 -lrt\" -DITERATIONS=0 -mcpu=xt-c910 core_list_join.c core_main.c core_matrix.c core_state.c core_util.c posix/core_portme.c -o ./coremark.exe -lrt
+
+(Rui VEN=GNU-GCC) debian@revos:/coremark$ ./coremark.exe
+2K performance run parameters for coremark.
+CoreMark Size    : 666
+Total ticks      : 11244
+Total time (secs): 11.244000
+Iterations/Sec   : 9782.995375
+Iterations       : 110000
+Compiler         : GCC 15.1.0 2025-09-12 (experimental)
+Flags            : -O2 -mcpu=xt-c910 -lrt
+Memory location  : Please put data here (e.g., flash, heap)
+seed CRC         : 0xE9F5
+CRC list         : 0x714
+CRC matrix       : 0x1D7
+CRC state        : 0x83A
+CRC final        : 0x3FF
+Verified OK. See rules in README.md.
+CoreMark v1: 9782.995375 / GCC 15.1.0 / -O2 -mcpu=xt-c910 / Heap
+
+(Rui VEN=GNU-GCC) debian@revos:/coremark$
+```
+
 
 返回上级目录并退出ruyi GCC虚拟环境
 
@@ -67,7 +94,28 @@ xtheadba_xtheadbb_xtheadbs_xtheadcmo_\
 xtheadcondmov_xtheadfmemidx_xtheadmac_xtheadmemidx_xtheadmempair_xtheadsync" compile
 ./coremark.exe
 ```
-<img width="1377" height="980" alt="image" src="https://github.com/user-attachments/assets/ddd444e4-95f2-440c-b2b0-ae069b8f2826" />
+
+
+正常情况下，终端会看到类似如下输出：
+
+```
+CoreMark Size    : 666
+Total ticks      : 18369
+Total time (secs): 18.369000
+Iterations/Sec   : 5988.349937
+Iterations       : 110000
+Compiler version : RISC Clang 21.1.0 (https://github.com/RISC/LLVM-project 362fe61ae35c6c8f867be76aa8f3, 2021)
+Compiler flags   : -O2 -march=rv64imafdc_zifencei_zicsr_zicntr_zihpm_zfh_xtheadba_xthead_xthead -lrt
+Memory location  : Please put data memory location here
+                   (e.g. code in flash, data on heap etc)
+seed CRC         : 0xe9f
+CRC [0]          : 0x714
+CRC [1]          : 0x1d7
+CRC [2]          : 0x83a
+CRC Final        : 0x3f
+Correct, see README.md.
+CoreMark 1.0: 5988.349937 / Clang 21.1.0 / -O2 -march=... -lrt / Heap
+```
 
 
 返回上级目录并退出ruyi GCC虚拟环境

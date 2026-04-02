@@ -49,25 +49,17 @@ last_update: 2025-03-19
   
 
 | 连接名称 | VSYS | GND | RCLK | CLK | DIN |
-
 | -------- | ---- | ---- | ----- | ----- | ----- |
-
 | 连接引脚 | 3.3V | GND | PIN50 | PIN23 | PIN19 |
 
   
 
 | Pico-8SEG | 信号 | Milk-V Duo S |
-
 | ------------------------------- | -------- | ------------------ |
-
 | VSYS（39脚） | 3.3V供电 | J3头部 1脚（3.3V） |
-
 | GND（任选，比如3、8、13、18脚） | 地 | J3头部 6脚（GND） |
-
 | GP9（12脚） | RCLK | J4头部 50脚 |
-
 | GP10（14脚） | CLK | J3头部 23脚 |
-
 | GP11（15脚） | DIN | J3头部 19脚 |
 
   
@@ -159,7 +151,17 @@ make
 
 ```
 
-![编译成功](https://raw.githubusercontent.com/jason-hue/riscv-board-custom-dev/main/Duo_S/images/image-20260203165439259.png)
+正常情况下，终端会看到类似如下输出：
+
+```bash
+«Ruyi venv» λ ~/tmp/Pico-8SEG-LED/Pico-8SEG-LED/c/ main* make clean
+«Ruyi venv» λ ~/tmp/Pico-8SEG-LED/Pico-8SEG-LED/c/ main* make
+riscv64-unknown-linux-musl-gcc -mcpu=c906fdv -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d -I/home/knifefire/tmp/Pico-8SEG-LED/Pico-8SEG-LED/c/../../../../include/system -I /home/knifefire/tmp/Pico-8SEG-LED/Pico-8SEG-LED/c/../../../../venv/sysroot/usr/include -o DEV_Config.o -c DEV_Config.c
+riscv64-unknown-linux-musl-gcc -mcpu=c906fdv -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d -I/home/knifefire/tmp/Pico-8SEG-LED/Pico-8SEG-LED/c/../../../../include/system -I /home/knifefire/tmp/Pico-8SEG-LED/Pico-8SEG-LED/c/../../../../venv/sysroot/usr/include -o shu.o -c shu.c
+riscv64-unknown-linux-musl-gcc -mcpu=c906fdv -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d -I/home/knifefire/tmp/Pico-8SEG-LED/Pico-8SEG-LED/c/../../../../include/system -I /home/knifefire/tmp/Pico-8SEG-LED/Pico-8SEG-LED/c/../../../../venv/sysroot/usr/include -o shu DEV_Config.o shu.o -L/home/knifefire/tmp/Pico-8SEG-LED/Pico-8SEG-LED/c/../../../../libs/system/musl_riscv64 -L/home/knifefire/tmp/Pico-8SEG-LED/Pico-8SEG-LED/c/../../../../venv/sysroot/lib -L/home/knifefire/tmp/Pico-8SEG-LED/Pico-8SEG-LED/c/../../../../venv/sysroot/usr/lib -l wiringx
+«Ruyi venv» λ ~/tmp/Pico-8SEG-LED/Pico-8SEG-LED/c/ main* 
+```
+
 
 #### 验证结果
 
@@ -171,4 +173,10 @@ file shu
 
 ```
 
-![验证结果截图](https://raw.githubusercontent.com/jason-hue/riscv-board-custom-dev/main/Duo_S/images/image-20260203165304483.png)
+正常情况下，终端会看到类似如下输出：
+
+```bash
+«Ruyi venv» λ ~/tmp/Pico-8SEG-LED/Pico-8SEG-LED/c/ main* file shu
+shu: ELF 64-bit LSB executable, UCB RISC-V, RVC, double-float ABI, version 1 (SYSV), dynamically linked, interpreter /lib/ld-musl-riscv64.so.1, with debug_info, not stripped
+```
+

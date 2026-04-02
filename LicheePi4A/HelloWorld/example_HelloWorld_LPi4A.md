@@ -7,7 +7,7 @@ status: basics
 last_update: 2025-10-29
 ---
 
-# RuyiSDK 示例 01：Hello World
+# RuyiSDK 基础示例
 
 ## Hello World (GCC版)
 
@@ -42,7 +42,16 @@ EOF
 riscv64-plct-linux-gnu-gcc hello.c -o hello-gcc
 ./hello-gcc
 ```
-<img width="1377" height="980" alt="image" src="https://github.com/user-attachments/assets/5e593005-7b48-4253-80f5-99108e5d231b" />
+
+正常情况下，终端会看到类似如下输出：
+
+```
+debian@revyos-lpi4a:~$ source venv-gnu-plat/bin/ruyi-activate
+<an@revyos-lpi4a:~$ riscv64-plat-linux-gnu-gcc hello.c -o hello-gcc
+《Ruyi venv-gnu-plat》 debian@revyos-lpi4a:~$ ./hello-gcc
+Hello, World!
+《Ruyi venv-gnu-plat》 debian@revyos-lpi4a:~$ 
+```
 
 
 退出ruyi GCC虚拟环境
@@ -78,7 +87,17 @@ clang -v
 clang hello.c -o hello-llvm; ./hello-llvm
 ```
 
-<img width="1377" height="980" alt="image" src="https://github.com/user-attachments/assets/c75ae57e-6953-43fd-a3fc-94ce2a80a8a8" />
+正常情况下，终端会看到类似如下输出：
+
+```
+debian@revos:/home$ source venv-llvm-plct/bin/rui activate
+《Rui venv-llvm-plct》 debian@revos:/home$ clang hello.c -o hello-llvm
+《Rui venv-llvm-plct》 debian@revos:/home$ ./hello-llvm
+Hello, World!
+《Rui venv-llvm-plct》 debian@revos:/home$
+```
+
+
 
 
 退出ruyi GCC虚拟环境

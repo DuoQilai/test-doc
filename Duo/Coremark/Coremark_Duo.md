@@ -63,7 +63,7 @@ ssh root@192.168.42.1
 ./coremark-gcc
 ```
 
-正常情况下，终端会看到如下输出：
+正常情况下，终端会看到类似如下输出：
 
 ```
 [rootamilkv-duo]~# ./coremark-gcc
@@ -143,7 +143,7 @@ ssh root@192.168.42.1
 ./coremark-llvm
 ```
 
-正常情况下，终端会看到如下输出：
+正常情况下，终端会看到类似如下输出：
 
 ```
 [root@milkv-duo]~# ./coremark-llvm

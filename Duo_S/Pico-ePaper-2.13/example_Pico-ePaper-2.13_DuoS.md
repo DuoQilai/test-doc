@@ -30,23 +30,11 @@ last_update: 2025-03-19
 
 参考文档：https://github.com/DuoQilai/riscv-board-custom-dev/blob/main/Duo_S/boot_DuoS.md
 
-##### 通过串口连接
-将 microSD 卡插入 Milk-V Duo S，重启。
+#### 登录系统
 
-开发板串口通过杜邦线与调试模块连接；黑色箭头指的为GND，白色箭头指的为TX，绿色箭头指的为RX。（连接方式为：开发板GND->调试器GND，开发板TX->调试器RX，开发板RX->调试器TX
+将 microSD 卡插入 Milk-V Duo S，重启。使用串口连接登录系统（默认用户名：`root`，默认密码：`milkv`）。
 
-
-##### 打开终端，使用 minicom 或 tio 连接串口
-
-```
-minicom -D /dev/ttyACM0 -c on
-
-默认用户名：`root`
-默认密码：`milkv`
-```
-重新给开发板上电，连接网口，等待开机
-
-![startup](./images/startup.png)
+![串口连接](https://raw.githubusercontent.com/jason-hue/riscv-board-custom-dev/main/Duo_S/images/uart.png)
 
 ### 2. 硬件连接
 
@@ -57,9 +45,7 @@ minicom -D /dev/ttyACM0 -c on
   
 
 | 连接名称 | GND | VCC | DC | CS | RST | BUSY | CLK | DIN |
-
 | -------- | ---- | ---------- | ----- | ----- | ----- | ----- | ----- | ----- |
-
 | 引脚 | GND | VCC (3.3V) | PIN50 | PIN11 | PIN13 | PIN46 | PIN23 | PIN19 |
 
   
@@ -136,8 +122,28 @@ make
 
 ```
 
+正常情况下，终端会看到类似如下输出：
 
-![编译成功](https://raw.githubusercontent.com/jason-hue/riscv-board-custom-dev/main/Duo_S/images/image-20260203170536657.png)
+```bash
+«Ruyi venv» λ ~/tmp/Pico-ePaper-2.13/Pico-ePaper-2.13/c/ main* make clean
+«Ruyi venv» λ ~/tmp/Pico-ePaper-2.13/Pico-ePaper-2.13/c/ main* source ../../../../venv/bin/ruyi-activate
+export TOOLCHAIN_PREFIX=riscv64-unknown-linux-musl-
+export SYSROOT=$(pwd)/../../../../venv/sysroot
+«Ruyi venv» λ ~/tmp/Pico-ePaper-2.13/Pico-ePaper-2.13/c/ main* export CFLAGS="-mcpu=c906fdv -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d -I$(pwd)/../../../../include/system"
+export LDFLAGS="-L$(pwd)/../../../../libs/system/musl_riscv64"
+«Ruyi venv» λ ~/tmp/Pico-ePaper-2.13/Pico-ePaper-2.13/c/ main* make
+riscv64-unknown-linux-musl-gcc -mcpu=c906fdv -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d -I/home/knifefire/tmp/Pico-ePaper-2.13/Pico-ePaper-2.13/c/../../../../include/system -I/home/knifefire/tmp/Pico-ePaper-2.13/Pico-ePaper-2.13/c/../../../../venv/sysroot/usr/include -o ImageData.o -c ImageData.c
+riscv64-unknown-linux-musl-gcc -mcpu=c906fdv -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d -I/home/knifefire/tmp/Pico-ePaper-2.13/Pico-ePaper-2.13/c/../../../../include/system -I/home/knifefire/tmp/Pico-ePaper-2.13/Pico-ePaper-2.13/c/../../../../venv/sysroot/usr/include -o font12.o -c font12.c
+riscv64-unknown-linux-musl-gcc -mcpu=c906fdv -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d -I/home/knifefire/tmp/Pico-ePaper-2.13/Pico-ePaper-2.13/c/../../../../include/system -I/home/knifefire/tmp/Pico-ePaper-2.13/Pico-ePaper-2.13/c/../../../../venv/sysroot/usr/include -o font16.o -c font16.c
+riscv64-unknown-linux-musl-gcc -mcpu=c906fdv -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d -I/home/knifefire/tmp/Pico-ePaper-2.13/Pico-ePaper-2.13/c/../../../../include/system -I/home/knifefire/tmp/Pico-ePaper-2.13/Pico-ePaper-2.13/c/../../../../venv/sysroot/usr/include -o font20.o -c font20.c
+riscv64-unknown-linux-musl-gcc -mcpu=c906fdv -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d -I/home/knifefire/tmp/Pico-ePaper-2.13/Pico-ePaper-2.13/c/../../../../include/system -I/home/knifefire/tmp/Pico-ePaper-2.13/Pico-ePaper-2.13/c/../../../../venv/sysroot/usr/include -o font24.o -c font24.c
+riscv64-unknown-linux-musl-gcc -mcpu=c906fdv -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d -I/home/knifefire/tmp/Pico-ePaper-2.13/Pico-ePaper-2.13/c/../../../../include/system -I/home/knifefire/tmp/Pico-ePaper-2.13/Pico-ePaper-2.13/c/../../../../venv/sysroot/usr/include -o font8.o -c font8.c
+riscv64-unknown-linux-musl-gcc -mcpu=c906fdv -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d -I/home/knifefire/tmp/Pico-ePaper-2.13/Pico-ePaper-2.13/c/../../../../include/system -I/home/knifefire/tmp/Pico-ePaper-2.13/Pico-ePaper-2.13/c/../../../../venv/sysroot/usr/include -o paper.o -c paper.c
+riscv64-unknown-linux-musl-gcc -mcpu=c906fdv -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d -I/home/knifefire/tmp/Pico-ePaper-2.13/Pico-ePaper-2.13/c/../../../../include/system -I/home/knifefire/tmp/Pico-ePaper-2.13/Pico-ePaper-2.13/c/../../../../venv/sysroot/usr/include -o paper ImageData.o font12.o font16.o font20.o font24.o font8.o paper.o -L/home/knifefire/tmp/Pico-ePaper-2.13/Pico-ePaper-2.13/c/../../../../libs/system/musl_riscv64 -L/home/knifefire/tmp/Pico-ePaper-2.13/Pico-ePaper-2.13/c/../../../../venv/sysroot/lib -L/home/knifefire/tmp/Pico-ePaper-2.13/Pico-ePaper-2.13/c/../../../../venv/sysroot/usr/lib -lwiringx
+«Ruyi venv» λ ~/tmp/Pico-ePaper-2.13/Pico-ePaper-2.13/c/ main* |
+```
+
+
 
 #### 验证结果
 
@@ -149,7 +155,13 @@ file paper
 
 ```
 
-![验证结果截图](https://raw.githubusercontent.com/jason-hue/riscv-board-custom-dev/main/Duo_S/images/image-20260203170606187.png)
+正常情况下，终端会看到类似如下输出：
+```bash
+«Ruyi venv» λ ~/tmp/Pico-ePaper-2.13/Pico-ePaper-2.13/c/ main* file paper
+paper: ELF 64-bit LSB executable, UCB RISC-V, RVC, double-float ABI, version 1 (SYSV), dynamically linked, interpreter /lib/ld-musl-riscv64v0p7_xthead.so.1, with debug_info, not stripped
+«Ruyi venv» λ ~/tmp/Pico-ePaper-2.13/Pico-ePaper-2.13/c/ main* 
+```
+
 
 ### 5. 显示字符
 
@@ -162,5 +174,6 @@ file paper
 ./paper
 
 ```
+
 
 ![运行验证结果](https://raw.githubusercontent.com/jason-hue/riscv-board-custom-dev/main/Duo_S/images/image-20250511160733556.png)

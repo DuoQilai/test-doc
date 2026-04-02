@@ -45,7 +45,14 @@ EOF
 riscv64-plct-linux-gnu-gcc hello.c -static -o hello-gcc
 ```
 
-![gnu-hello](./images/gnu-hello-compile.png)
+正常情况下，终端会看到类似如下输出：
+
+```
+debian@duos-1cae:~$ source venv-gnu-plct/bin/ruyi-activate
+<an@duos-1cae:~$ riscv64-plct-linux-gnu-gcc hello.c -o hello-gcc
+«Ruyi venv-gnu-plct» debian@duos-1cae:~$ 
+```
+
 
 将 GCC 构建的二进制传输至开发板
 
@@ -73,9 +80,16 @@ ssh root@192.168.42.1
 ./hello-gcc
 
 ```
+正常情况下，终端会看到类似如下输出：
 
+```
+debian@duos-1cae:~$ source venv-gnu-plct/bin/ruyi-activate
+<an@duos-1cae:~$ riscv64-plct-linux-gnu-gcc hello.c -o hello-gcc
+«Ruyi venv-gnu-plct» debian@duos-1cae:~$ ./hello-gcc
+Hello, World!
+«Ruyi venv-gnu-plct» debian@duos-1cae:~$ 
+```
 
-![gnu-hello](./images/gnu-hello-run.png)
 ## Hello World (LLVM) 
 
 创建并激活 ruyi 虚拟环境（LLVM）
@@ -98,7 +112,14 @@ clang -v
 clang hello.c -static -o hello-llvm
 ```
 
-![llvm-hello](./images/llvm-hello-compile.png)
+正常情况下，终端会看到类似如下输出：
+
+```
+debian@duos-1cae:~$ source venv-llvm-plct/bin/ruyi-activate
+«Ruyi venv-llvm-plct» debian@duos-1cae:~$ clang hello.c -o hello-llvm
+«Ruyi venv-llvm-plct» debian@duos-1cae:~$ 
+```
+
 
 将 LLVM 构建的二进制传输至开发板
 
@@ -126,5 +147,10 @@ ssh root@192.168.42.1
 ./hello-llvm
 
 ```
+正常情况下，终端会看到类似如下输出：
 
-![llvm-hello](./images/llvm-hello-run.png)
+```
+«Ruyi venv-llvm-plct» debian@duos-1cae:~$ ./hello-llvm
+Hello, World!
+«Ruyi venv-llvm-plct» debian@duos-1cae:~$ 
+```

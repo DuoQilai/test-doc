@@ -23,7 +23,13 @@ ruyi update
 ruyi install gnu-plct-xthead
 ```
 
-![image-20260316130355929](./images/image-20260316130355929.png)
+正常情况下，终端会看到如下输出：
+```bash
+debian@revos-lpi4a:~$ ruyi install gnu-plct-xthead
+info: skipping already installed package gnu-plct-xthead-3.1.0-ruyi.20250526
+```
+
+
 
 #### 创建并激活 Ruyi 虚拟环境
 
@@ -37,8 +43,27 @@ cd dhrystone-venv
 # 激活虚拟环境
 source ./bin/ruyi-activate
 ```
+正常情况下，终端会看到如下输出：
+```bash
+debian@revos-lpi4a:~$ ruyi venv -t gnu-plct-xthead sipeed-lpi4a dhrystone-venv
+info: Creating a Ruyi virtual environment at dhrystone-venv...
+info: The virtual environment is now created.
 
-![image-20260316130438916](./images/image-20260316130438916.png)
+You may activate it by sourcing the appropriate activation script in the bin directory, and deactivate by invoking `ruyi-deactivate`.
+
+A fresh sysroot/prefix is also provisioned in the virtual environment.
+It is available at the following path:
+  /home/debian/dhrystone-venv/sysroot
+
+The virtual environment also comes with ready-made CMake toolchain file and Meson cross file. Check the virtual environment root for those; comments in the files contain usage instructions.
+
+debian@revos-lpi4a:~$ cd dhrystone-venv
+debian@revos-lpi4a:~/dhrystone-venv$ source ./bin/ruyi-activate
+«Ruyi dhrystone-venv» debian@revos-lpi4a:~/dhrystone-venv$ riscv64-plctxthead-linux-gcc --version
+riscv64-plctxthead-linux-gcc (RuyiSDK 20250526 Xuantie-Sources Xuantie-binutils-8ee62aac8606 Xuantie-gcc-c2e0bcc86d1f Xuantie-glibc-29dd660835c5) 14.1.1 20240710
+Copyright (C) 2024 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions. There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
 
 #### 验证GCC版本
 
@@ -59,8 +84,22 @@ mkdir -p ~/projects/dhrystone && cd ~/projects/dhrystone
 git clone https://github.com/Keith-S-Thompson/dhrystone.git
 cd dhrystone
 ```
+正常情况下，终端会看到如下输出：
 
-![image-20260316130516513](./images/image-20260316130516513.png)
+```bash
+«Ruyi dhrystone-venv» debian@revyos-lpi4a:~/dhrystone-venv$ mkdir -p ~/projects/dhrystone && cd ~/projects/dhrystone
+«Ruyi dhrystone-venv» debian@revyos-lpi4a:~/projects/dhrystone$ git clone https://github.com/Keith-S-Thompson/dhrystone.git
+Cloning into 'dhrystone'...
+remote: Enumerating objects: 79, done.
+remote: Counting objects: 100% (20/20), done.
+remote: Compressing objects: 100% (10/10), done.
+remote: Total 79 (delta 14), reused 10 (delta 10), pack-reused 59 (from 1)
+Receiving objects: 100% (79/79), 217.86 KiB | 177.00 KiB/s, done.
+Resolving deltas: 100% (29/29), done.
+«Ruyi dhrystone-venv» debian@revyos-lpi4a:~/projects/dhrystone$ cd dhrystone
+«Ruyi dhrystone-venv» debian@revyos-lpi4a:~/projects/dhrystone/dhrystone$
+```
+
 
 ### 使用 nano 添加缺失的头文件
 
@@ -91,7 +130,6 @@ sed -i '/extern  int.*times/d' dhry_1.c
 
 ![image-20260316130902340](./images/image-20260316130902340.png)
 
-![image-20260316131240955](./images/image-20260316131240955.png)
 
 ### 修正重复包含头文件的问题
 
@@ -120,8 +158,39 @@ cat -n dhry_1.c | head -20
 ```bash
 riscv64-plctxthead-linux-gnu-gcc -std=gnu90 -O2 -DNOENUM -DTIMES -DHZ=100 -o dhrystone dhry_1.c dhry_2.c -lm
 ```
+正常情况下，终端会看到如下输出：
 
-![image-20260316131349885](./images/image-20260316131349885.png)
+```bash
+«Ruyi dhrystone-venv» debian@revos-lpi4a:~projects/dhrystone/dhrystone/v2.1$ nano dhry_1.c
+«Ruyi dhrystone-venv» debian@revos-lpi4a:~projects/dhrystone/dhrystone/v2.1$ riscv64-unknown-linux-gnu-gcc -std=gnu99 -O2 -DNOENUM -DTIMES -DHZ=100 -o dhrystone dhry_1.c dhry_2.c -lm
+dhry_1.c: In function ‘main’:
+dhry_1.c:97:3: warning: incompatible implicit declaration of built-in function ‘strcpy’ [-Wbuiltin-declaration-mismatch]
+  97 |    strcpy (Ptr_Glob->variant.var_1.Str_Comp,
+     |    ^~~~~~
+dhry_1.c:20:1: note: include ‘<string.h>’ or provide a declaration of ‘strcpy’
+   19 | #include <stdlib.h>
++++ | +#include <string.h>
+   20 | 
+dhry_1.c:223:40: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]
+  223 |    printf ("  Ptr_Comp:       %d\n", (int) Ptr_Glob->Ptr_Comp);
+      |                                        ^
+dhry_1.c:234:40: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]
+  234 |    printf ("  Ptr_Comp:       %d\n", (int) Next_Ptr_Glob->Ptr_Comp);
+      |                                        ^
+«Ruyi dhrystone-venv» debian@revos-lpi4a:~projects/dhrystone/dhrystone/v2.1$ ./dhrystone
+Dhrystone Benchmark, Version 2.1 (Language: C)
+
+Program compiled without 'register' attribute
+
+Please give the number of runs through the benchmark: 10000000
+
+Execution starts, 10000000 runs through Dhrystone
+Execution ends
+
+Final values of the variables used in the benchmark:
+
+Int_Glob:            5
+```
 
 ## 三、运行 Dhrystone 基准测试
 
@@ -141,8 +210,53 @@ Please give the number of runs through the benchmark:
 ```bash
 echo 10000000 | ./dhrystone
 ```
+正常情况下，终端会看到如下输出：
 
-![image-20260316131410788](./images/image-20260316131410788.png)
+```bash
+A«Ruyi dhrystone-venvA» debian@RevOS:~projects/dhrystone/dhrystone/v2.1$ ./dhrystone.c
+
+Dhrystone Benchmark, Version 2.1 (Language: C)
+Program compiled without 'register' attribute
+
+Please give the number of runs for the benchmark: 10000000
+
+Execution starts: 10,000,000 iterations of Dhrystone
+Execution ends.
+
+Final benchmark values:
+Int_Glob: 5
+  should be: 5
+Bool_Glob: 1
+  should be: 1
+Ch_1_Glob: A
+  should be: A
+Ch_2_Glob: B
+  should be: B
+Arr_1_Glob[8]: 7
+  should be: 7
+Arr_2_Glob[8][7]: 10000010
+  should be: Number_Of_Runs + 10
+Ptr_Glob->
+  Ptr_Comp: 90784
+    should be: (implementation-dependent)
+  Discr: 0
+    should be: 0
+  Enum_Comp: 2
+    should be: 2
+  Int_Comp: 17
+    should be: 17
+  Str_Comp: DHRYSTONE PROGRAM, SOME STRING
+    should be: DHRYSTONE PROGRAM, SOME STRING
+Next_Ptr_Glob->
+  Ptr_Comp: 90784
+    should be: (implementation-dependent), same as above
+  Discr: 0
+    should be: 0
+  Enum_Comp: 1
+    should be: 1
+  Int_Comp: 18
+```
+
 
 ### 四、返回上级目录并退出 Ruyi 虚拟环境
 
@@ -153,5 +267,10 @@ cd ..
 # 退出 Ruyi 虚拟环境
 ruyi-deactivate
 ```
+正常情况下，终端会看到类似如下输出：
 
-![image-20260316164108311](./images/image-20260316164108311.png)
+```bash
+A«Ruyi dhrystone-venvA» debian@revos-lpi4a:~/projects/dhrystone/dhrystone/v2.1$ cd ..
+A«Ruyi dhrystone-venvA» debian@revos-lpi4a:~/projects/dhrystone/dhrystone$ ruyi-deactivate
+debian@revos-lpi4a:~/projects/dhrystone/dhrystone$
+```

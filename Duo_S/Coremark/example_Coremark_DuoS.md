@@ -38,7 +38,20 @@ make CC=riscv64-plct-linux-gnu-gcc XCFLAGS="-mcpu=thead-c906 -static" compile
 
 mv coremark.exe coremark-gcc
 ```
-![gnu-hello](./images/gnu-hello-compile.png)
+
+正常情况下，终端会看到类似如下输出：
+
+```
+debian@duos-1cae:~$ source venv-gnu-plct/bin/ruyi-activate
+<an@duos-1cae:~$ riscv64-plct-linux-gnu-gcc hello.c -o hello-gcc
+«Ruyi venv-gnu-plct» debian@duos-1cae:~$ ./hello-gcc
+Hello, World!
+
+«Ruyi venv-gnu-plct» debian@duos-1cae:~$ cd coremark
+<ake CC=riscv64-plct-linux-gnu-gcc XCFLAGS="-mcpu=thead-c906" compile
+riscv64-plct-linux-gnu-gcc -O2 -Ilinux -I. -DFLAGS_STR=\""-O2 -mcpu=thead-c906"\" -DITERATIONS=0 -mcpu=thead-c906 core_list_join.c core_main.c core_matrix.c core_state.c core_util.c posix/core_portme.c -o ./coremark.exe -lrt
+«Ruyi venv-gnu-plct» debian@duos-1cae:~/coremark$
+```
 
 将 GCC 构建的二进制传输至开发板
 
@@ -66,8 +79,29 @@ ssh root@192.168.42.1
 ./coremark-gcc
 
 ```
+正常情况下，终端会看到类似如下输出：
 
-![gnu-coremark](./images/gnu-coremark-run.png)
+```
+«Ruyi venv-gnu-plct» debian@duos-1cae:~/coremark$ ./coremark.exe
+2K performance run parameters for coremark.
+CoreMark Size    : 666
+Total ticks      : 11883
+Total time (secs): 11.883000
+Iterations/Sec   : 3366.153328
+Iterations       : 40000
+Compiler version : GCC15.1.0 20250912 (experimental)
+Compiler flags   : -O2 -mcpu=thead-c906 -lrt
+Memory location  : Please put data memory location here
+                   (e.g. code in flash, data on heap etc)
+seedcrc          : 0xe9f5
+[0]crclist       : 0xe714
+[0]crcmatrix     : 0x1fd7
+[0]crcstate      : 0x8e3a
+[0]crcfinal       : 0x25b5
+Correct operation validated. See README.md for run and reporting rules.
+CoreMark 1.0 : 3366.153328 / GCC15.1.0 20250912 (experimental) -O2 -mcpu=thead-c906 -lrt / Heap
+«Ruyi venv-gnu-plct» debian@duos-1cae:~/coremark$
+```
 
 ## Coremark（LLVM）
 
@@ -101,7 +135,18 @@ xtheadcondmov_xtheadfmemidx_xtheadmac_xtheadmemidx_xtheadmempair_xtheadsync -st
 mv coremark.exe coremark-llvm
 ```
 
-![llvm-hello](./images/llvm-hello-compile.png)
+正常情况下，终端会看到类似如下输出：
+
+```
+«Ruyi venv-llvm-plct» debian@duos-1cae:~$ cd coremark
+«Ruyi venv-llvm-plct» debian@duos-1cae:~/coremark$ make clean
+rm -f ./coremark.exe ./core_list_join.o ./core_main.o ./core_matrix.o ./core_state.o ./core_util.o ./*.log *.info ./index.html
+<rch=rv64imafdc_xtheadba_xtheadbb_xtheadbs_xtheadcmo_\
+<dx_xtheadmac_xtheadmemidx_xtheadmempair_xtheadsync" compile
+clang -O2 -Ilinux -Iposix -I. -DFLAGS_STR=\""-O2 -march=rv64imafdc_xtheadba_xtheadbb_xtheadbs_xtheadcmo_xtheadcondmov_xtheadfmemidx_xtheadmac_xtheadmemidx_xtheadmempair_xtheadsync -lrt"\" -DITERATIONS=0 -march=rv64imafdc_xtheadba_xtheadbb_xtheadbs_xtheadcmo_xtheadcondmov_xtheadfmemidx_xtheadmac_xtheadmemidx_xtheadmempair_xtheadsync core_list_join.c core_main.c core_matrix.c core_state.c core_util.c posix/core_portme.c -o ./coremark.exe -lrt
+«Ruyi venv-llvm-plct» debian@duos-1cae:~/coremark$ 
+```
+
 
 将 GCC 构建的二进制传输至开发板
 
@@ -130,5 +175,27 @@ ssh root@192.168.42.1
 
 ```
 
-![llvm-coremark](./images/llvm-coremark-run.png)
+正常情况下，终端会看到类似如下输出：
+
+```
+«Ruyi venv-llvm-plct» debian@duos-1cae:~/coremark$ ./coremark.exe
+2K performance run parameters for coremark.
+CoreMark Size    : 666
+Total ticks      : 14666
+Total time (secs): 14.666000
+Iterations/Sec   : 2727.396700
+Iterations       : 40000
+Compiler version : RuyiSDK Clang 21.1.0 (https://github.com/ruyisdk/llvm-project 3623fe661ae35c6c80ac221f14d85be76aa870f RuyiSDK 20250915)
+Compiler flags   : -O2 -march=rv64imafdc_xtheadba_xtheadbb_xtheadbs_xtheadcmo_xtheadcondmov_xtheadfmemidx_xtheadmac_xtheadmemidx_xtheadmempair_xtheadsync -lrt
+Memory location  : Please put data memory location here
+                   (e.g. code in flash, data on heap etc)
+seedcrc          : 0xe9f5
+[0] crclist      : 0xe714
+[0] crcmatrix    : 0x1fd7
+[0] crcstate     : 0x8e3a
+[0] crcfinal     : 0x25b5
+Correct operation validated. See README.md for run and reporting rules.
+CoreMark 1.0 : 2727.396700 / RuyiSDK Clang 21.1.0 (https://github.com/ruyisdk/llvm-project 3623fe661ae35c6c80ac221f14d85be76aa870f RuyiSDK 20250915) -O2 -march=rv64imafdc_xtheadba_xtheadbb_xtheadbs_xtheadcmo_xtheadcondmov_xtheadfmemidx_xtheadmac_xtheadmemidx_xtheadmempair_xtheadsync -lrt / Heap
+«Ruyi venv-llvm-plct» debian@duos-1cae:~/coremark$
+```
 
