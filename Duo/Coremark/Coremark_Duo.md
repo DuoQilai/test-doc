@@ -62,7 +62,30 @@ ssh root@192.168.42.1
 
 ./coremark-gcc
 ```
-![gnu-coremark](./images/gnu-coremark.png)
+
+正常情况下，终端会看到如下输出：
+
+```
+[rootamilkv-duo]~# ./coremark-gcc
+2K performance run parameters for coremark
+CoreMark Size    :666
+Total ticks      :13853
+Total time(secs) : 13.853000
+Iterations/Sec   :2165.595900
+Iterations       : 30000
+Compiler version:GCC15.1.0 20250912(experimental)
+Compiler flags   : -02 -mcpu=thead-c906-static-lrt
+Memory location:Please put data memory location here
+                    (e.g.code in flash,data on heap etc) 
+seedcrc          : 0xe9f5
+[0]crclist       : 0xe714
+[0]crcmatrix     : 0x1fd7
+[0]crcstate      : 0x8e3a
+[0]crcfinal      : 0x5275
+Correct operation validated. See README.md for run and reporting rules.
+CoreMark 1.0 : 2165.595900 / GCC15.1.0 20250912 (experimental) -02 -mcpu=thead-c906 -static -lrt / Heap
+[rootamilkv-duo]~# 
+```
 ## Coremark (LLVM版) 
 创建并激活ruyi虚拟环境（LLVM）
 
@@ -119,4 +142,27 @@ ssh root@192.168.42.1
 
 ./coremark-llvm
 ```
-![llvm-coremark](./images/llvm-coremark.png)
+
+正常情况下，终端会看到如下输出：
+
+```
+[root@milkv-duo]~# ./coremark-llvm
+2K performance run parameters for coremark
+CoreMark Size    :666
+Total ticks      :13939
+Total time(secs) : 13.939000
+Iterations/Sec.  : 2152.234737
+Iterations       : 30000
+Compiler version : RuyiSDK Clang 21.1.0 (https://github.com/ruyisdk/llvm-project 3623fe661ae35c6c80ac221f14d85be76aa870f RuyiSDK 20250915)
+Compiler flags   : -O2 -march=rv64imafdc_xtheadba_xtheadbb_xtheadbs_xtheadcmo_xtheadcondmov_xtheadfmemidx_xtheadmac_xtheadmemidx_xtheadmempair_xtheadsync -static -lrt
+Memory location : Please put data memory location here
+                    (e.g.code in flash,data on heap etc) 
+seedcrc          : 0xe9f5
+[0]crclist       : 0xe714
+[0]crcmatrix     : 0x1fd7
+[0]crcstate      : 0x8e3a
+[0]crcfinal      : 0x5275
+Correct operation validated. See README.md for run and reporting rules.
+CoreMark 1.0 : 2152.234737 / RuyiSDK Clang 21.1.0 (https://github.com/ruyisdk/llvm-project 3623fe661ae35c6c80ac221f14d85be76aa870f RuyiSDK 20250915) -O2 -march=rv64imafdc_xtheadba_xtheadbb_xtheadbs_xtheadcmo_xtheadcondmov_xtheadfmemidx_xtheadmac_xtheadmemidx_xtheadmempair_xtheadsync -static -lrt / Heap
+[root@milkv-duo]~# 
+```
