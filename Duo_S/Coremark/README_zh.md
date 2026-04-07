@@ -4,7 +4,7 @@ sys_ver: v1.1.4
 sys_var: v1
 
 status: basics
-last_update: 2025-03-19
+last_update: 2026-04-06
 ---
 
 # RuyiSDK 基础示例

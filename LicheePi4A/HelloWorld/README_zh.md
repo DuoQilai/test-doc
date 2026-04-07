@@ -4,7 +4,7 @@ sys_ver: "20250930"
 sys_var: null
 
 status: basics
-last_update: 2025-10-29
+last_update: 2026-04-03
 ---
 
 # RuyiSDK 基础示例

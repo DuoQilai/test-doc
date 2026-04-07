@@ -4,7 +4,7 @@ sys_ver: "20250930"
 sys_var: null
 
 status: others
-last_update: 2025-10-29
+last_update: 2026-04-03
 ---
 
 # RuyiSDK 性能评测示例
